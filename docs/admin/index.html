@@ -10,18 +10,10 @@
   <!-- Netlify Identity widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Decap CMS -->
+  <!-- Decap CMS (auto-loads /admin/config.yml by default) -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Explicitly tell CMS where to load config.yml
-    CMS.init({
-      config: {
-        load_config_file: true,
-        path: "/admin/config.yml"
-      }
-    });
-
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) window.netlifyIdentity.open("login");
