@@ -4,29 +4,22 @@
   <meta charset="utf-8" />
   <title>OliveNode CMS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Prevent caching -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- disables site favicon -->
 </head>
 <body>
-  <!-- Netlify Identity widget (for login & invite acceptance) -->
+  <!-- Netlify Identity widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Decap CMS (Netlify CMS) -->
+  <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Redirect to /admin after login
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
+      window.netlifyIdentity.on("init", user => {
+        if (!user) window.netlifyIdentity.open("login");
       });
+      window.netlifyIdentity.on("login", () => document.location.reload());
+      window.netlifyIdentity.on("logout", () => document.location.href = "/admin/");
     }
   </script>
 </body>
